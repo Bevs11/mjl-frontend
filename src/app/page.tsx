@@ -4,6 +4,7 @@ export default function Home() {
     return (
         <main className="tw-flex tw-flex-col tw-items-center">
             <div className="tw-font-bold tw-text-[38px]">HELLO MJL</div>
+            <input type="file"></input>
         </main>
     );
 }
