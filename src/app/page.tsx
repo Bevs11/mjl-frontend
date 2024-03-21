@@ -23,6 +23,10 @@ const InputImage = () => {
         setModalOpen(false);
     };
 
+    const updateAvatar = (imageSrc: string) => {
+        avatarURL.current = imageSrc;
+        setModalOpen(false);
+    };
     return (
         <div className="flex flex-col mt-20 gap-10 items-center">
             <div className="font-bold">INPUT IMAGE HERE</div>
@@ -42,13 +46,22 @@ const InputImage = () => {
                 Edit Image
             </button>
             {modalOpen && (
-                <ImageEditingModal handleCloseModal={handleCloseModal} />
+                <ImageEditingModal
+                    handleCloseModal={handleCloseModal}
+                    updateAvatar={updateAvatar}
+                />
             )}
         </div>
     );
 };
 
-const ImageEditingModal = ({ handleCloseModal }: { handleCloseModal: any }) => {
+const ImageEditingModal = ({
+    handleCloseModal,
+    updateAvatar,
+}: {
+    handleCloseModal: any;
+    updateAvatar: any;
+}) => {
     return (
         <div
             className="relative z-10"
@@ -68,7 +81,10 @@ const ImageEditingModal = ({ handleCloseModal }: { handleCloseModal: any }) => {
                             >
                                 Close Modal
                             </button>
-                            <ImageCropper />
+                            <ImageCropper
+                                updateAvatar={updateAvatar}
+                                handleCloseModal={handleCloseModal}
+                            />
                         </div>
                     </div>
                 </div>

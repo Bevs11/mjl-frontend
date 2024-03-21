@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import setCanvasPreview from "@/lib/setCanvasPreview";
+import React, { useRef, useState } from "react";
 import ReactCrop, {
     makeAspectCrop,
     type Crop,
     centerCrop,
+    convertToPixelCrop,
 } from "react-image-crop";
 
-const MIN_Dimensions = 150;
-const ASPECT_RATIO = 1;
+const MIN_Dimensions = 150; // edit this
+const ASPECT_RATIO = 1; // edit this
 
-const ImageCropper = () => {
+const ImageCropper = ({
+    updateAvatar,
+    handleCloseModal,
+}: {
+    updateAvatar: any;
+    handleCloseModal: any;
+}) => {
     const [imgSrc, setImgSrc] = useState<string | ArrayBuffer | null>("");
     const [crop, setCrop] = useState<Crop>();
     const [error, setError] = useState<string>("");
+    const imgRef = useRef<any>(null);
+    const previewCanvasRef = useRef<any>(null);
 
     const onSelectFile = (e: any) => {
         const file = e.target.files[0];
@@ -77,22 +87,54 @@ const ImageCropper = () => {
                         onChange={(pixelCrop, percentCrop) =>
                             setCrop(percentCrop)
                         }
-                        circularCrop
                         keepSelection
                         aspect={ASPECT_RATIO}
                         minWidth={MIN_Dimensions}
                     >
                         <img
+                            ref={imgRef}
                             src={imgSrc.toString()}
                             alt="avatar"
                             style={{ maxHeight: "800px" }}
                             onLoad={onImageLoad}
                         />
                     </ReactCrop>
-                    <button className="text-white font-mono text-xs py-2 px-4 rounded-2xl mt-4 bg-sky-500 hover:bg-sky-600">
+                    <button
+                        className="text-white font-mono text-xs py-2 px-4 rounded-2xl mt-4 bg-sky-500 hover:bg-sky-600"
+                        onClick={() => {
+                            if (crop) {
+                                setCanvasPreview(
+                                    imgRef.current, // HTMLImageElement
+                                    previewCanvasRef.current, // HTMLCanvasElement
+                                    convertToPixelCrop(
+                                        crop,
+                                        imgRef.current.width,
+                                        imgRef.current.height
+                                    )
+                                );
+                                const dataUrl =
+                                    previewCanvasRef.current.toDataURL();
+                                updateAvatar(dataUrl);
+                                handleCloseModal();
+                            }
+                        }}
+                    >
                         Crop Image
                     </button>
                 </div>
+            )}
+            {crop && (
+                <canvas
+                    ref={previewCanvasRef}
+                    className="mt-4"
+                    style={{
+                        display: "none", // hidden canvas
+                        border: "1px solid black",
+                        objectFit: "contain",
+                        width: 150,
+                        height: 150,
+                    }}
+                />
             )}
         </div>
     );
