@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef } from "react";
 
 import ReactCrop, {
@@ -44,7 +45,7 @@ export default function App() {
     const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
     const [scale, setScale] = useState(1);
     const [rotate, setRotate] = useState(0);
-    const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+    const [aspect, setAspect] = useState<number | undefined>(9 / 16);
 
     function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files.length > 0) {
