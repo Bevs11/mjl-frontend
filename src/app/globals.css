@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    color: black;
-}
-
 .full-height {
     height: 100vh;
     height: 100svh;
@@ -25,6 +21,15 @@
     padding: 8px 10px;
     border-radius: 6px;
     background-color: #122a43;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-sky-blue {
+    color: #222222;
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #5db4fb;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
