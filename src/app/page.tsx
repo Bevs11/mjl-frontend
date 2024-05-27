@@ -4,10 +4,12 @@ import { useRef, useState } from "react";
 import ImageCropper from "./components/ImageCropper";
 import "react-image-crop/dist/ReactCrop.css";
 import Hero from "./components/homepage/Hero";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
     return (
         <main>
+            <Navbar />
             <Hero />
         </main>
     );
