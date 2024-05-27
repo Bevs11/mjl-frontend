@@ -5,11 +5,25 @@
 * {
     color: black;
 }
-body {
-    background-color: white;
-}
 
 .full-height {
     height: 100vh;
     height: 100svh;
+}
+
+.btn-yellow {
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #f5ee43;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-dark-blue {
+    color: #ffffff;
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #122a43;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
