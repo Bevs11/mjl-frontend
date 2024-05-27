@@ -3,8 +3,11 @@ import Image from "next/image";
 
 import LogoSmall from "../../../public/mjl-logo.svg";
 import Magnfyingglass from "../../../public/navbar/magnifying-glass.svg";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
+    const router = useRouter();
     return (
         <div className="h-[56px] bg-customDarkBlue">
             <div className="h-full px-2 sm:px-8 md:px-12 lg:px-[64px] flex items-center justify-between">
@@ -22,7 +25,7 @@ export default function Navbar() {
                 <div className="flex gap-6 text-white">
                     <div>CATEGORIES</div>
                     <div>WEBINARS</div>
-                    <div>CERTIFICATE</div>
+                    <Link href={"/certificate"}>CERTIFICATE</Link>
                 </div>
                 <div className="bg-white/10 py-2 px-2 rounded w-full max-w-[500px] flex">
                     <Image
