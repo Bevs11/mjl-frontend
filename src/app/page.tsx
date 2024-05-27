@@ -3,9 +3,14 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import ImageCropper from "./components/ImageCropper";
 import "react-image-crop/dist/ReactCrop.css";
+import Hero from "./components/homepage/Hero";
 
 export default function Home() {
-    return <main></main>;
+    return (
+        <main>
+            <Hero />
+        </main>
+    );
 }
 
 // const InputImage = () => {
