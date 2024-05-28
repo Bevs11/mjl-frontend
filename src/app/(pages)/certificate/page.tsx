@@ -2,6 +2,7 @@
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
+import Image from "next/image";
 
 const data = {
     name: "Juan Dela Cruz",
@@ -15,14 +16,17 @@ export default function Certification() {
     const handlegeneratePdf = async () => {
         const inputData = certificateRef.current;
         if (!inputData) return;
+
         try {
             const canvas = await html2canvas(inputData);
             const imgData = canvas.toDataURL("image/png");
+            const naturalWidth = canvas.width;
+            const naturalHeight = canvas.height;
 
             const doc = new jsPDF({
                 orientation: "landscape",
-                unit: "in",
-                format: [8, 11],
+                unit: "px",
+                format: [naturalHeight, naturalWidth],
             });
 
             const width = doc.internal.pageSize.getWidth();
@@ -35,11 +39,15 @@ export default function Certification() {
         }
     };
     return (
-        <div>
+        <div className=" bg-white">
             {/* certificate */}
             <div>
-                <div className="p-5" ref={certificateRef}>
-                    <div className="h-[800px] border-solid border-black border-2 flex flex-col items-center justify-center gap-10">
+                <div
+                    className="w-[1000px] p-5"
+                    ref={certificateRef}
+                    style={{ position: "absolute", left: "-5000px" }}
+                >
+                    <div className=" h-[800px] border-solid border-black border-2 flex flex-col items-center justify-center gap-10 ">
                         <div className="text-5xl">CERTIFICATION</div>
                         <div className="text-2xl">
                             Title:{" "}
